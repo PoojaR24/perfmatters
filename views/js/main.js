@@ -449,7 +449,7 @@ var resizePizzas = function(size) {
 
   // removed the dx variable declaration from the changePizzaSizes function for loop
 
-  var dx = determineDx(document.getElementsByClassNames("randomPizzaContainer")[0], size);
+  var dx = determineDx(document.querySelectorAll("randomPizzaContainer")[0], size);
         var newwidth = (document.getElementsByClassNames("randomPizzaContainer")[0].offsetWidth + dx) + 'px';
         document.getElementsByClassNames("randomPizzaContainer")[0].style.width = newwidth;
         var pizzasDiv = document.getElementById("randomPizzas");
