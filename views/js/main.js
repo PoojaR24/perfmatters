@@ -497,14 +497,36 @@ function logAverageFrame(times) {   // times is the array of User Timing measure
 // https://www.igvita.com/slides/2012/devtools-tips-and-tricks/jank-demo.html
 
 // Moves the sliding background pizzas based on scroll position
+// implemented requestAnimationFrame as seen on http://www.html5rocks.com/en/tutorials/speed/animations/
+// declare variable for known scroll position
+var latestKnownScrollY = 0,
+ticking = false;
+
+// Callback for scroll event
+function onScroll() {
+  latestKnownScrollY = window.scrollY;
+  requestTick();
+}
+
+// calls requestAnimationFrame
+function requestTick() {
+  if(!ticking) {
+    window.requestAnimationFrame(updatePositions);
+  }
+  ticking = true;
+}
+
+// Moves the sliding background pizzas based on scroll position
 function updatePositions() {
   frame++;
   window.performance.mark("mark_start_frame");
+//creat var y1 to remove one computation out of for loop
+  y1 = latestKnownScrollY / 1250;
 
-  var items = document.querySelectorAll('.mover');
   for (var i = 0; i < items.length; i++) {
-    var phase = Math.sin((document.body.scrollTop / 1250) + (i % 5));
-    items[i].style.left = items[i].basicLeft + 100 * phase + 'px';
+    var phase = Math.sin(y1 + (i % 5));
+    window.items[i].style.transform = 'translateX(' +(100*phase) + 'px)';
+    // changed above items[i].style.left to transform and transalte to improve FPS
   }
 
   // User Timing API to the rescue again. Seriously, it's worth learning.
@@ -515,11 +537,14 @@ function updatePositions() {
     var timesToUpdatePosition = window.performance.getEntriesByName("measure_frame_duration");
     logAverageFrame(timesToUpdatePosition);
   }
+  window.ticking = false;
 }
 
-// runs updatePositions on scroll
-window.addEventListener('scroll', updatePositions);
+// runs requestAnimationFrame(updatePositions) on scroll
+window.addEventListener('scroll', onScroll, false);
 
+// removed document.querySelector("#movingPizzas1") from the event listener function and into its own variable
+vPizzas = document.querySelector("#movingPizzas1");
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
   var cols = 8;
@@ -532,7 +557,10 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.style.width = "73.333px";
     elem.basicLeft = (i % cols) * s;
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
-    document.querySelector("#movingPizzas1").appendChild(elem);
+    vPizzas.appendChild(elem);
   }
-  updatePositions();
+
+  // moved the items variable declaration down here to make it available globally
+  var items = document.querySelectorAll('.mover');
+  window.requestAnimationFrame(updatePositions);
 });
