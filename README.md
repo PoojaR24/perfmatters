@@ -1,7 +1,7 @@
 ## Website Performance Optimization portfolio project
 
-Open index.html in a browser
-My project can viewed at https://poojar24.github.io/perfmatters/
+Open `index.html` in a browser.
+My project can viewed at https://poojar24.github.io/perfmatters/ also.
 
 NOTES BY POOJA.R
 ================
