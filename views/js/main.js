@@ -555,7 +555,8 @@ document.addEventListener('DOMContentLoaded', window.requestAnimationFrame(funct
   var s = 256;
   height = window.screen.height;
   var rows = height / s;
-  for (var i = 0; i < rows; i++) {
+  var n = rows * cols;
+  for (var i = 0; i < n; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza.png";
@@ -566,7 +567,8 @@ document.addEventListener('DOMContentLoaded', window.requestAnimationFrame(funct
     elem.style.top = (Math.floor(i / cols) * s) + 'px';
     mPizzas.appendChild(elem);
   }
-  
+
+
   window.requestAnimationFrame(updatePositions);
 }));
 
