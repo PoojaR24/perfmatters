@@ -1,8 +1,53 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-  <link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/bootstrap-grid.css">
+  <style type="text/css">
+        /** {
+        outline: 1px solid red !important;
+      }*/
+      * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -box-sizing: border-box;
+      }
+      body {
+        font-family: "Trebuchet MS", Helvetica, sans-serif;
+        background: black;
+      }
+      input {
+        background: grey;
+        font-size: 18px;
+      }
+      form {
+        display: inline-block;
+      }
+      .centered {
+        text-align: center;
+      }
+      #pizzaSize {
+        font-weight: 800;
+      }
+      .mover {
+        position: fixed;
+        width: 256px;
+        z-index: -1;
+      }
+      .randomPizzaContainer {
+        float: left;
+        display: flex;
+      }
+      .randomPizzaContainer:after {
+        content: "";
+        display: table;
+        clear:both;
+      }
+       .container {
+        background-color: rgba(240, 60, 60, 0.8);
+      }
+  </style>
 </head>
 
 <body>
@@ -102,11 +147,11 @@
           </div>
         </div>
         <div id="randomPizzas" class="row">
-          <div id="pizza0" class="randomPizzaContainer" style="width:33.33%; height: 325px;">
-            <div style="width:35%">
+          <div id="pizza0" class="randomPizzaContainer" style="width:33.33%;">
+            <div class="col-md-6">
               <img src="images/pizza.png" class="img-responsive">
             </div>
-            <div style="width:65%">
+            <div class="col-md-6">
               <h4>The Udacity Special</h4>
               <ul>
                 <li>Turkey</li>
@@ -119,11 +164,11 @@
               </ul>
             </div>
           </div>
-          <div id="pizza1" class="randomPizzaContainer" style="width:33.33%; height: 325px;">
-            <div style="width:35%">
+          <div id="pizza1" class="randomPizzaContainer" style="width:33.33%;">
+            <div class="col-md-6">
               <img src="images/pizza.png" class="img-responsive">
             </div>
-            <div style="width:65%">
+            <div class="col-md-6">
               <h4>The Cameron Special</h4>
               <ul>
                 <li>Chicken</li>
@@ -140,5 +185,4 @@
   <script type="text/javascript" src="js/main.js"></script>
 </body>
 
-</html>
 </html>
