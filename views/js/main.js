@@ -422,6 +422,7 @@ var resizePizzas = function(size) {
 
   // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
   function determineDx (elem, size) {
+    var offsetWidth;
     var oldwidth = elem.offsetWidth;
     var windowwidth = document.querySelector("#randomPizzas").offsetWidth;
     var oldsize = oldwidth / windowwidth;
@@ -447,17 +448,13 @@ var resizePizzas = function(size) {
     return dx;
   }
 
-  // removed the dx variable declaration from the changePizzaSizes function for loop
+function changePizzaSizes(size) {
 
-  var dx = determineDx(document.querySelectorAll("randomPizzaContainer")[0], size);
-        var newwidth = (document.getElementsByClassNames("randomPizzaContainer")[0].offsetWidth + dx) + 'px';
-        document.getElementsByClassNames("randomPizzaContainer")[0].style.width = newwidth;
-        var pizzasDiv = document.getElementById("randomPizzas");
-  // Iterates through pizza elements on the page and changes their widths
-  function changePizzaSizes(size) {
-     for (var i = 2; i < 100; i++) {
-
-      pizzasDiv.appendChild(pizzaElementGenerator(i));
+    var randomPizzas = document.getElementsByClassName("randomPizzaContainer");
+    var dx = determineDx(randomPizzas[0], size);
+    var newwidth = (randomPizzas[0].offsetWidth + dx) + 'px';
+    for (var i = 0; i < randomPizzas.length; i++) {
+      randomPizzas[i].style.width = newwidth;
     }
   }
 
